@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>5177</title>
+        <style>
+            #mobileframe {
+                width: 200vw;
+                height: 200vh;
+                scale: 0.5;
+                transform-origin: left top;
+            }
+            #framecontainer {
+                position: fixed;
+                left: -100vw;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="document.getElementById('framecontainer').requestFullscreen()">нажми меня</button>
+        <div id="framecontainer">
+            <iframe src="main.html" id="mobileframe" frameborder="0"></iframe>
+        </div>
+    </body>
+</html>

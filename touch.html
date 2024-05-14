@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест тачскрина</title>
+<style>html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+#info {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: sans-serif;
+    display: none; 
+}
+
+#exitButton {
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+    <div id="info">
+        Максимум касаний: <span id="maxTouches">0</span>
+        <button id="exitButton">Выход</button>
+    </div>
+    <script>
+        const info = document.getElementById('info');
+const maxTouchesSpan = document.getElementById('maxTouches');
+const exitButton = document.getElementById('exitButton');
+let maxTouches = 0;
+let currentTouches = 0;
+
+function handleTouch(event) {
+    event.preventDefault(); 
+
+    currentTouches = event.touches.length;
+    maxTouches = Math.max(maxTouches, currentTouches);
+    maxTouchesSpan.textContent = maxTouches;
+
+    for (let i = 0; i < event.touches.length; i++) {
+        const touch = event.touches[i];
+        const dot = document.createElement('div');
+        dot.style.position = 'absolute';
+        dot.style.left = touch.pageX + 'px';
+        dot.style.top = touch.pageY + 'px';
+        dot.style.width = '10px';
+        dot.style.height = '10px';
+        dot.style.backgroundColor = 'red';
+        dot.style.borderRadius = '50%';
+        document.body.appendChild(dot);
+        setTimeout(() => dot.remove(), 600); // timeout 600 ms
+    }
+}
+
+function showInfo() {
+    info.style.display = 'block';
+}
+
+document.addEventListener('touchstart', handleTouch);
+document.addEventListener('touchmove', handleTouch);
+document.addEventListener('touchend', showInfo);
+
+exitButton.addEventListener('click', () => {
+    window.location.href = 'main.html';
+});
+
+    </script>
+</body>
+</html>
